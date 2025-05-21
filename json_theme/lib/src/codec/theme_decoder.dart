@@ -2295,10 +2295,10 @@ class ThemeDecoder {
   ///  * [decodeColor]
   ///  * [decodeEdgeInsetsGeometry]
   ///  * [decodeShapeBorder]
-  static CardTheme? decodeCardTheme(dynamic value, {bool validate = true}) {
-    CardTheme? result;
+  static CardThemeData? decodeCardTheme(dynamic value, {bool validate = true}) {
+    CardThemeData? result;
 
-    if (value is CardTheme) {
+    if (value is CardThemeData) {
       result = value;
     } else if (value != null) {
       assert(
@@ -2308,10 +2308,9 @@ class ThemeDecoder {
           validate: validate,
         ),
       );
-      result = CardTheme(
+      result = CardThemeData(
         clipBehavior: decodeClip(value['clipBehavior'], validate: false),
         color: decodeColor(value['color'], validate: false),
-        data: decodeCardThemeData(value['data'], validate: false),
         elevation: JsonClass.maybeParseDouble(value['elevation']),
         margin: decodeEdgeInsetsGeometry(value['margin'], validate: false),
         shadowColor: decodeColor(value['shadowColor'], validate: false),
@@ -3583,10 +3582,13 @@ class ThemeDecoder {
   ///  * [decodeEdgeInsetsGeometry]
   ///  * [decodeShapeBorder]
   ///  * [decodeTextStyle]
-  static DialogTheme? decodeDialogTheme(dynamic value, {bool validate = true}) {
-    DialogTheme? result;
+  static DialogThemeData? decodeDialogTheme(
+    dynamic value, {
+    bool validate = true,
+  }) {
+    DialogThemeData? result;
 
-    if (value is DialogTheme) {
+    if (value is DialogThemeData) {
       result = value;
     } else if (value != null) {
       assert(
@@ -3596,7 +3598,7 @@ class ThemeDecoder {
           validate: validate,
         ),
       );
-      result = DialogTheme(
+      result = DialogThemeData(
         actionsPadding: decodeEdgeInsetsGeometry(
           value['actionsPadding'],
           validate: false,
@@ -3609,7 +3611,7 @@ class ThemeDecoder {
           value['contentTextStyle'],
           validate: false,
         ),
-        data: decodeDialogThemeData(value['data'], validate: false),
+
         elevation: JsonClass.maybeParseDouble(value['elevation']),
         iconColor: decodeColor(value['iconColor'], validate: false),
         insetPadding: decodeEdgeInsets(value['insetPadding'], validate: false),
@@ -12008,7 +12010,6 @@ class ThemeDecoder {
           validate: false,
         ),
         iconTheme: decodeIconThemeData(value['iconTheme'], validate: false),
-        indicatorColor: decodeColor(value['indicatorColor'], validate: false),
         inputDecorationTheme: decodeInputDecorationTheme(
           value['inputDecorationTheme'],
           validate: false,
@@ -12124,7 +12125,10 @@ class ThemeDecoder {
           value['switchTheme'],
           validate: false,
         ),
-        tabBarTheme: decodeTabBarTheme(value['tabBarTheme'], validate: false),
+        tabBarTheme: decodeTabBarThemeData(
+          value['tabBarTheme'],
+          validate: false,
+        ),
         textButtonTheme: decodeTextButtonThemeData(
           value['textButtonTheme'],
           validate: false,
@@ -12474,6 +12478,9 @@ class ThemeDecoder {
       );
       result = TooltipThemeData(
         // decoration: @unencodable
+        constraints: BoxConstraints(
+          minHeight: JsonClass.maybeParseDouble(value['height']) ?? 0,
+        ),
         enableFeedback: JsonClass.maybeParseBool(value['enableFeedback']),
         excludeFromSemantics: JsonClass.maybeParseBool(
           value['excludeFromSemantics'],
@@ -12481,7 +12488,6 @@ class ThemeDecoder {
         exitDuration: JsonClass.maybeParseDurationFromMillis(
           value['exitDuration'],
         ),
-        height: JsonClass.maybeParseDouble(value['height']),
         margin: decodeEdgeInsetsGeometry(value['margin'], validate: false),
         padding: decodeEdgeInsetsGeometry(value['padding'], validate: false),
         preferBelow: JsonClass.maybeParseBool(value['preferBelow']),

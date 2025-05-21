@@ -1653,17 +1653,15 @@ void main() {
       },
     });
 
-    entry = CardTheme(
-      data: CardThemeData(
-        clipBehavior: Clip.hardEdge,
-        color: const Color(0xff111111),
-        elevation: 3.0,
-        margin: const EdgeInsets.all(10.0),
-        shadowColor: const Color(0xff222222),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          side: BorderSide.none,
-        ),
+    entry = CardThemeData(
+      clipBehavior: Clip.hardEdge,
+      color: const Color(0xff111111),
+      elevation: 3.0,
+      margin: const EdgeInsets.all(10.0),
+      shadowColor: const Color(0xff222222),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        side: BorderSide.none,
       ),
     );
 
@@ -3274,7 +3272,7 @@ void main() {
     expect(ThemeDecoder.decodeGradient(null), null);
     expect(ThemeEncoder.encodeGradient(null), null);
 
-    Gradient entry = const LinearGradient(
+    var entry = const LinearGradient(
       colors: <Color>[Color(0xff111111), Color(0xff222222)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -5133,7 +5131,7 @@ void main() {
     expect(ThemeDecoder.decodeOutlinedBorder(null), null);
     expect(ThemeEncoder.encodeOutlinedBorder(null), null);
 
-    OutlinedBorder entry = BeveledRectangleBorder(
+    var entry = BeveledRectangleBorder(
       borderRadius: BorderRadius.circular(2.0),
       side: const BorderSide(
         color: _kColor,
@@ -6411,7 +6409,7 @@ void main() {
     expect(ThemeDecoder.decodeShapeBorder(null), null);
     expect(ThemeEncoder.encodeShapeBorder(null), null);
 
-    ShapeBorder entry = const CircleBorder(
+    var entry = const CircleBorder(
       side: BorderSide(color: _kColor, width: 1.0, style: BorderStyle.solid),
     );
 
@@ -6753,7 +6751,7 @@ void main() {
     expect(ThemeDecoder.decodeSliderTrackShape(null), null);
     expect(ThemeEncoder.encodeSliderTrackShape(null), null);
 
-    SliderTrackShape entry = const RectangularSliderTrackShape();
+    var entry = const RectangularSliderTrackShape();
 
     expect(ThemeDecoder.decodeSliderTrackShape(entry), entry);
 
@@ -8300,7 +8298,7 @@ void main() {
       buttonTheme: const ButtonThemeData(buttonColor: Color(0xffbbbbbb)),
       canvasColor: const Color(0xffcccccc),
       cardColor: const Color(0xffdddddd),
-      cardTheme: const CardTheme(color: Color(0xffeeeeee)),
+      cardTheme: const CardThemeData(color: Color(0xffeeeeee)),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.all(const Color(0xff123456)),
       ),
@@ -8370,7 +8368,6 @@ void main() {
       hintColor: const Color(0xdd222222),
       hoverColor: const Color(0xee222222),
       iconTheme: const IconThemeData(color: Color(0xdd333333)),
-      indicatorColor: const Color(0xdd444444),
       inputDecorationTheme: const InputDecorationTheme(
         focusColor: Color(0xdd555555),
       ),
@@ -8462,7 +8459,9 @@ void main() {
       toggleButtonsTheme: const ToggleButtonsThemeData(
         color: Color(0xbb222222),
       ),
-      tooltipTheme: const TooltipThemeData(height: 19.0),
+      tooltipTheme: const TooltipThemeData(
+        constraints: BoxConstraints(minHeight: 19.0),
+      ),
       typography: Typography.material2018(),
       unselectedWidgetColor: const Color(0xbb444444),
       useMaterial3: true,
@@ -9703,10 +9702,10 @@ void main() {
     expect(ThemeEncoder.encodeTooltipThemeData(null), null);
 
     const entry = TooltipThemeData(
+      constraints: BoxConstraints(minHeight: 1.0),
       enableFeedback: true,
       excludeFromSemantics: true,
       exitDuration: Duration(milliseconds: 100),
-      height: 1.0,
       margin: EdgeInsets.all(2.0),
       padding: EdgeInsets.all(3.0),
       preferBelow: true,
